@@ -42,6 +42,7 @@
    </div>
    
                           <!-- TITLE -->
+<div class="parallax">
 
     <div class="container1">
         <div class="center">
@@ -49,7 +50,7 @@
         </div>
     </div>
 	
-    
+</div>
     <!-- External Media --> 
     
     <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet">

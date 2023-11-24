@@ -1,4 +1,22 @@
-<!DOCTYPE html>
+<?php 
+  
+  $error = $_SERVER[REDIRECT_STATUS];
+  $error_title='';
+  $error_message = '';
+
+  if($error = 404){
+    $error_title = '404 Page Not Found';
+
+  }
+  else {
+    $error_title = '';
+
+  }
+  
+  ?>
+
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +26,7 @@
     <script src="error.js"></script>
 </head>
 <body>
+
 
 <div class="error">
 

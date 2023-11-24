@@ -20,6 +20,18 @@ body{
   font-family: 'Archivo Black', sans-serif;
   
 }
+.parallax {
+  
+  background-image: url("/photos/divEcoBackground.gif");
+  height: 51vh;
+  z-index: 10;
+  width: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
 
 /* navbar */
 nav {

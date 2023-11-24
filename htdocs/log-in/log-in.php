@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,21 +27,21 @@
             <h1>Sign In</h1>
           <form method="post" action="/log-in/log-in-logic.php">
             <div class="email">
-                <input class="input-content" type="text" id="username" name="username" required placeholder="UsernameExample2" maxlength="50" required />
-                  <label for="username">Username</label>
+                <input class="input-content" type="text" id="username" name="username" required placeholder="Митко_01" maxlength="50" required />
+                  <label for="username">Потребителско име</label>
            </div>
            <div class="password">
-                 <input class="input-content" type="password" id="password" name="password" required placeholder="RandomPassword123" maxlength="50" required />
-                   <label for="password">Password</label>
+                 <input class="input-content" type="password" id="password" name="password" required placeholder="Паролата28" maxlength="50" required />
+                   <label for="password">Парола</label>
            </div>    
            <div id="TheHoleButton">  
            <div class="button-wrapper">
-        <button  class="button" type="submit" value="Log In">Sign In</button>
+        <button  class="button" type="submit" value="Log In"> Впиши се</button>
         <div class="button-bg"></div>
         </div> </form>
         </div>
         </div>
-        <p >Don't have an acount? <a href="/sign-up/sign-up.php">Create one.</a> Or<a href="/index/index.php"> continue without one?</a>  </p>
+        <p >Нямаш акаунт? <a href="/sign-up/sign-up.php"> Създай един.</a> Or<a href="/index/index.php"> продължи без</a>  </p>
     </center>   
 </body>
 </html>
