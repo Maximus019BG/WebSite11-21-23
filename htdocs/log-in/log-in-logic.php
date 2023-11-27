@@ -28,10 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["username"] = $row["username "];
             readfile("D:/SaitOnline/server/Server/htdocs/index/index.php"); // Прехвърляне
             exit();
-        } else {
+        } 
+        else {
             echo "Incorrect password. <a href='/log-in/log-in.php'>Try again</a>.";
         }
-    } else {
+    } 
+    else {
         echo "User not found. <a href='/sign-up/sign-up.php'>Sign up</a> if you don't have an account.";
     }
 
