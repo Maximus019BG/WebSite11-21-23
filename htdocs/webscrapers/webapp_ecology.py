@@ -24,10 +24,10 @@ urls = [
 try:
     # Connection to the database
     db = mysql.connector.connect(
-        host="127.0.0.1",
-        user="pesho",
-        password="parola",
-        database="WebScrape"
+        host="sql309.infinityfree.com",
+        user="if0_35510034",
+        password="15NZ44uf0qs6uUL",
+        database="if0_35510034_web"
     )
 
     cursor = db.cursor()

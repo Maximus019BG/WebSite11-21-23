@@ -40,10 +40,10 @@ urls = [
 try:
     # Connection to the database
     db = mysql.connector.connect(
-        host="127.0.0.1",
-        user="pesho",
-        password="parola",
-        database="WebScrape"
+        host="sql309.infinityfree.com",
+        user="if0_35510034",
+        password="15NZ44uf0qs6uUL",
+        database="if0_35510034_web"
     )
 
     cursor = db.cursor()
@@ -79,31 +79,44 @@ try:
                     name_value = name_element.text.strip()
                     price_value = price_element.text.strip()
                        
-                    # Use urllib to get the image source
-                    img_src = img_element['src'] if img_element and 'src' in img_element.attrs else None
-                    img_src = urllib.request.urljoin(url, img_src) if img_src else None
-
+                    # Use urllib to get the entire img tag
+                    img_tag_html = str(img_element)
+                    
                     # Check if a record with the same name already exists
-                    select_query = "SELECT price, photo FROM hardware WHERE name = %s"
+                    select_query = "SELECT id, price, photo FROM hardware WHERE name = %s"
                     cursor.execute(select_query, (name_value,))
                     existing_record = cursor.fetchone()
 
                     if existing_record:
-                        existing_price, existing_photo = existing_record
-                        if price_value != existing_price or img_src != existing_photo:
+                        existing_id, existing_price, existing_photo = existing_record
+                        if price_value != existing_price or img_tag_html != existing_photo:
                             # Price or photo has changed; update the record
                             update_query = "UPDATE hardware SET price = %s, photo = %s WHERE name = %s"
-                            cursor.execute(update_query, (price_value, img_src, name_value))
-                            print(f"Updated: {name_value}, New Price: {price_value}, New Photo: {img_src}")
+                            cursor.execute(update_query, (price_value, img_tag_html, name_value))
+                            print(f"Updated: {name_value}, New Price: {price_value}, New Photo: {img_tag_html}")
                         else:
                             print(f"No changes for: {name_value}")
                     else:
                         # No existing record with the same name; insert a new record
                         insert_query = "INSERT INTO hardware (name, price, type, photo) VALUES (%s, %s, %s, %s)"
-                        cursor.execute(insert_query, (name_value, price_value, product_type, img_src))
-                        print(f"Inserted: {name_value}, Price: {price_value}, Type: {product_type}, Photo: {img_src}")
+                        cursor.execute(insert_query, (name_value, price_value, product_type, img_tag_html))
+                        print(f"Inserted: {name_value}, Price: {price_value}, Type: {product_type}, Photo: {img_tag_html}")
 
+                # Commit changes to the database
                 db.commit()
+
+                # Clean up: Remove records from the database that are not present on the current webpage
+                delete_query = "DELETE FROM hardware WHERE name NOT IN ({}) AND type = %s".format(
+                    ', '.join(['%s'] * len(name_elements))
+                )
+                cursor.execute(delete_query, [name_element.text.strip() for name_element in name_elements] + [product_type])
+                db.commit()
+
+                # Renumber the IDs
+                cursor.execute("SET @counter = 0;")
+                cursor.execute("UPDATE hardware SET id = @counter := @counter + 1;")
+                db.commit()
+                
             else:
                 print(f"Name or price elements not found on the web page: {url}")
         else:

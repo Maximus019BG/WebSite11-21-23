@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Връзки
-    $conn = new mysqli("127.0.0.1", "pesho", "parola", "lms2");
+    $conn = new mysqli("sql309.infinityfree.com", "if0_35510034", "15NZ44uf0qs6uUL", "if0_35510034_web");
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);

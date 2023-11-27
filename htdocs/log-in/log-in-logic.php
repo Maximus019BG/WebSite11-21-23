@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     //Връзки
-    $conn = new mysqli("127.0.0.1", "pesho", "parola", "lms2");
+    $conn = new mysqli("sql309.infinityfree.com", "if0_35510034", "15NZ44uf0qs6uUL", "if0_35510034_web");
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Потвърждаване на парола
         if (password_verify($password, $row["password"])) {
             $_SESSION["user_id"] = $row["id"];
-            $_SESSION["username"] = $row["username"];
+            $_SESSION["username"] = $row["username "];
             readfile("D:/SaitOnline/server/Server/htdocs/index/index.php"); // Прехвърляне
             exit();
         } else {

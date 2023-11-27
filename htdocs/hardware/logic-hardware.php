@@ -1,9 +1,9 @@
 <?php
 
-$servername = "127.0.0.1";
-$username = "pesho";
-$password = "parola";
-$database = "webscrape";
+$servername = "sql309.infinityfree.com";
+$username = "if0_35510034";
+$password = "15NZ44uf0qs6uUL";
+$database = "if0_35510034_web";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $database);
@@ -23,46 +23,44 @@ $sql = "SELECT * FROM hardware WHERE type IN ('$searchTypesString')";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-   
-// Concatenate the HTML output
-$output = '';
+    // Concatenate the HTML output
+    $output = '';
 
-$iteration = 0;
-while ($row = $result->fetch_assoc()) {
-    // Access data using $row['column_name']
-    if ($iteration % 4 == 0) {
-        // Open a new slider owl-carousel div every three iterations
-        $output .= '<div class="slider owl-carousel">';
+    $iteration = 0;
+    while ($row = $result->fetch_assoc()) {
+        // Access data using $row['column_name']
+
+        if ($iteration % 4 == 0) {
+            // Open a new slider owl-carousel div every three iterations
+            $output .= '<div class="slider owl-carousel">';
+        }
+
+        $output .= '<div class="card">' .
+            '<div class="img" id="' . $row["id"] . '">' .
+            '<img src="' . $row["image_src"] . '" alt="">' . // Assuming there's a column named 'image_src' in your database
+            '</div>' .
+            '<div class="content">' .
+            '<div class="title">' . $row["name"] . '</div>' .
+            '<div class="sub-title">' . "Type: " . $row["type"] . '</div>' .
+            '</div>' .
+            '</div>';
+
+        if ($iteration % 4 == 3 || $iteration == $result->num_rows - 1) {
+            // Close the slider owl-carousel div every three iterations or on the last iteration
+            $output .= '</div>';
+        }
+
+        $iteration++;
     }
 
-    $output .= '<div class="card">' . 
-                   '<div class="img" id= " '. $row["id"].' ">' .
-                       '<img src="#" alt="">' .
-                   '</div>' .
-                   '<div class="content">' .
-                       '<div class="title">' .  $row["name"] . '</div>' .
-                       '<div class="sub-title">' . "Type: " . $row["type"] . '</div>' .
-                   '</div>' .
-               '</div>';
-
-    if ($iteration % 4 == 3 || $iteration == $result->num_rows - 1) {
-        // Close the slider owl-carousel div every three iterations or on the last iteration
+    // Close the slider owl-carousel div if there are no results
+    if ($result->num_rows == 0) {
         $output .= '</div>';
     }
-
-    $iteration++;
-}
-
-if ($result->num_rows == 0) {
-    $output = "0 results";
-}
 
 } else {
     $output = "0 results";
 }
 
-
 $conn->close();
-
 ?>
-
